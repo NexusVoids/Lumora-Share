@@ -1,0 +1,22 @@
+body {
+    background:#0d1117;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container {
+    margin-top:50px;
+}
+
+button {
+    padding:10px;
+    margin:10px;
+    cursor:pointer;
+}
+
+.file {
+    background:#222;
+    padding:10px;
+    margin:5px;
+}
