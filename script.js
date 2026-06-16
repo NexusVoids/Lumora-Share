@@ -1,12 +1,20 @@
 let files = [];
 
-function uploadFile() {
+function uploadFiles() {
     const input = document.getElementById("fileInput");
 
-    const file = input.files[0];
-    if(!file) return;
+    if (!input.files.length) return;
 
-    files.push(file.name);
+    for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+
+        files.push({
+            name: file.name,
+            url: URL.createObjectURL(file)
+        });
+    }
+
+    input.value = "";
     renderFiles();
 }
 
@@ -14,17 +22,26 @@ function renderFiles() {
     const list = document.getElementById("fileList");
     list.innerHTML = "";
 
-    files.forEach((f, i) => {
+    files.forEach((file, index) => {
         list.innerHTML += `
         <div class="file">
-            ${f}
-            <button onclick="alert('No real download yet')">Download</button>
-            <button onclick="deleteFile(${i})">Delete</button>
-        </div>`;
+            <span>${file.name}</span>
+
+            <div>
+                <a href="${file.url}" download="${file.name}">
+                    <button>Download</button>
+                </a>
+
+                <button onclick="deleteFile(${index})" style="background:red;color:white;">
+                    Delete
+                </button>
+            </div>
+        </div>
+        `;
     });
 }
 
-function deleteFile(i){
-    files.splice(i,1);
+function deleteFile(index) {
+    files.splice(index, 1);
     renderFiles();
 }
