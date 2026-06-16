@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Lumora Share</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
-  <h1>✦ Lumora Share</h1>
+    <h1 class="logo">✦ Lumora Share</h1>
 
-  <input type="file" id="fileInput">
-  <button onclick="uploadFile()">Upload</button>
+    <input type="file" id="fileInput" multiple>
+    <button onclick="uploadFiles()">Upload</button>
 
-  <h2>Files</h2>
-  <div id="fileList"></div>
+    <h2>Files</h2>
+    <div id="fileList"></div>
 </div>
 
 <script src="script.js"></script>
