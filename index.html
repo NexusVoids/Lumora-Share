@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumora Share</title>
+
+<style>
+body{
+    background:#0d1117;
+    color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:800px;
+    background:#161b22;
+    padding:30px;
+    border-radius:20px;
+}
+
+.logo{
+    font-size:40px;
+    font-weight:bold;
+    text-align:center;
+    background:linear-gradient(90deg,#00d4ff,#7d5fff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.upload{
+    text-align:center;
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin:5px;
+}
+
+.uploadBtn{
+    background:#00d4ff;
+}
+
+.file{
+    background:#21262d;
+    padding:15px;
+    margin-top:10px;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.download{
+    background:#2ea043;
+    color:white;
+}
+
+.delete{
+    background:#da3633;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">✦ Lumora Share</div>
+
+    <div class="upload">
+        <input type="file" id="fileInput" multiple>
+        <br>
+        <button class="uploadBtn" onclick="uploadFiles()">Upload</button>
+    </div>
+
+    <div id="fileList"></div>
+</div>
+
+<script>
+let files = [];
+
+function uploadFiles(){
+    const input = document.getElementById("fileInput");
+
+    for(const file of input.files){
+        files.push(file);
+    }
+
+    renderFiles();
+}
+
+function renderFiles(){
+    const list = document.getElementById("fileList");
+    list.innerHTML = "";
+
+    files.forEach((file,index)=>{
+
+        const url = URL.createObjectURL(file);
+
+        list.innerHTML += `
+        <div class="file">
+            <span>${file.name}</span>
+
+            <div>
+                <a href="${url}" download="${file.name}">
+                    <button class="download">Download</button>
+                </a>
+
+                <button class="delete"
+                onclick="deleteFile(${index})">
+                Delete
+                </button>
+            </div>
+        </div>
+        `;
+    });
+}
+
+function deleteFile(index){
+    files.splice(index,1);
+    renderFiles();
+}
+</script>
+
+</body>
+</html>
